@@ -10,7 +10,6 @@ cursor = databaseConnection.cursor()
 def addUser(username, password):
     try: 
         password = hashPassword(password).hex()
-        print("The hashed password: " + password)
         cursor.execute(f"INSERT INTO User VALUES ('{username}', '{password}')")
         databaseConnection.commit()
     except Exception as e:
@@ -53,7 +52,6 @@ def checkPassword(username, password):
         passwordFound = checkPassword.fetchall()
         if len(passwordFound) != 0:
             print("Login successful")
-            print(passwordFound)
             messagebox.showinfo("Login Successful", "Login successful!")
 
             #Print query results for purposes of demonstration 
