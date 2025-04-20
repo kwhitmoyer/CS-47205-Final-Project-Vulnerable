@@ -22,7 +22,7 @@ def loginExistingUserForInjection(existingUsername, existingPassword):
     decryptedUsername = decrypt(usernameKey, usernameNonce, usernameCipher, usernameTag).decode('utf-8')
     decryptedPassword = decrypt(passwordKey, passwordNonce, passwordCipher, passwordTag).decode('utf-8')
 
-    checkPassword(decryptedUsername, decryptedPassword)
+    checkPasswordForInjection(decryptedUsername, decryptedPassword)
 
 
 def addNewUser(newUsernameInput, newPasswordInput): 

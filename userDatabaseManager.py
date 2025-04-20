@@ -72,23 +72,11 @@ def checkPassword(username, password):
 def checkPasswordForInjection(username, password):
     try: 
         password = hashPassword(password).hex()
-        query = f"SELECT * FROM User WHERE Username = '{username}' AND password = '{password}'"
-        checkPassword = cursor.executescript(query)
-        passwordFound = checkPassword.fetchall()
-        if len(passwordFound) != 0:
-            print("Login successful")
-            print(passwordFound)
-            messagebox.showinfo("Login Successful", "Login successful!")
-
-            #Print query results for purposes of demonstration 
-            print("Query Returns:")
-            for entry in passwordFound:
-                print(entry)
+        query = f"SELECT * FROM User WHERE Username = '{username}' AND password = '{password}';"
+        cursor.executescript(query)
             
-            return True
-        else:
-            print("Login failed")
-            messagebox.showinfo("Login Failed", "Login failed.")
+        messagebox.showinfo("Table dropped.", "User table dropped. Did you mean to do that?")
+        return True
     except Exception as e: 
         print("Failed to check password: ", e)
         #Provides visual of a DROP TABLES sql injection attack in demo video 
