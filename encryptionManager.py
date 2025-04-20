@@ -11,7 +11,6 @@ def encrypt(plaintext):
     aes_key = get_random_bytes(32)
     cipher = AES.new(aes_key, AES.MODE_EAX)
     ciphertext, tag = cipher.encrypt_and_digest(plaintext.encode('utf-8'))
-    print("The message was encrypted successfully: " + plaintext)
     return(aes_key, cipher.nonce, ciphertext, tag)
 
 def decrypt(aes_key, nonce, ciphertext, tag):
@@ -19,7 +18,6 @@ def decrypt(aes_key, nonce, ciphertext, tag):
     plaintext = cipher.decrypt(ciphertext)
     try: 
         cipher.verify(tag)
-        print("The message was decrypted successfully: " + plaintext.decode('utf-8'))
         return plaintext
     except ValueError:
         print("Message is corrupted.")
